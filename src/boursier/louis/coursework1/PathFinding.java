@@ -1,6 +1,9 @@
 package boursier.louis.coursework1;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -11,23 +14,32 @@ import java.util.List;
 // Use Fibonacci heap to optimize the data structure (no need to sort anymore)
 // Memorize the distance calculations to optimize
 
-public class Main {
+public class PathFinding {
 
     private static final String ALGO = "ASTAR";
 
     public static void main(String[] args){
 
         List<String> file;
-        String content = null;
+        String content;
         Cave[] caves;
-        Path path = FileSystems.getDefault().getPath("./", "input1.cav");
+
+        if(args.length != 1){
+            System.err.println("Use: PathFinding file.cav");
+            return;
+        }
+
+        String fileName = args[0];
+        Path path = FileSystems.getDefault().getPath("./", fileName);
 
         try {
             file = Files.readAllLines(path);
             content = file.get(0);
         } catch (IOException e) {
             e.printStackTrace();
+            return;
         }
+
         String[] values = content.split(",");
         int cavesNumber = Integer.parseInt(values[0]);
         caves = new Cave[cavesNumber];
@@ -96,15 +108,33 @@ public class Main {
         double distance = 0.0;
         if(explored.contains(endingCave)){ // print the shortest path backward
             do{
-                solution += currentCave.getId() + " ";
+                solution = currentCave.getId() + " " + solution;
                 if(currentCave.getClosestCave()!=null){
                     distance += currentCave.getDistance(currentCave.getClosestCave());
                 }
             }while((currentCave = currentCave.getClosestCave())!=null);
         }else{
-            solution = "No possible path.";
+            solution = "0";
         }
 
-        System.out.println(solution + " --> " + Math.round(distance));
+        System.out.println(solution + " - Distance = " + Math.round(distance));
+
+        writeUsingOutputStream(solution, fileName.split("\\.")[0] + ".csn");
+    }
+
+    private static void writeUsingOutputStream(String data, String fileName) {
+        OutputStream os = null;
+        try {
+            os = new FileOutputStream(new File(fileName));
+            os.write(data.getBytes(), 0, data.length());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }finally{
+            try {
+                os.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }
