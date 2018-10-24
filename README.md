@@ -15,6 +15,8 @@ The final N*N integers give the connectivity of the tunnels. 1 means connected, 
 connected. Remember that some tunnel are one-way.
 The order of the connectivity matrix is a follows:
 Connectivity of Cavern 1 to Cavern 1
+
+
 Connectivity of Cavern 2 to Cavern 1
 Connectivity of Cavern 3 to Cavern 1
 Connectivity of Cavern 4 to Cavern 1
