@@ -117,7 +117,7 @@ public class PathFinding {
             solution = "0";
         }
 
-        System.out.println(solution + " - Distance = " + Math.round(distance));
+        System.out.println(solution.trim() + " - Distance = " + Math.round(distance));
 
         writeUsingOutputStream(solution, fileName.split("\\.")[0] + ".csn");
     }
