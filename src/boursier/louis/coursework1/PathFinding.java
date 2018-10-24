@@ -117,9 +117,9 @@ public class PathFinding {
             solution = "0";
         }
 
-        System.out.println(solution.trim() + " - Distance = " + Math.round(distance));
+        System.out.println(solution + " - Distance = " + Math.round(distance));
 
-        writeUsingOutputStream(solution, fileName.split("\\.")[0] + ".csn");
+        writeUsingOutputStream(solution.trim(), fileName.split("\\.")[0] + ".csn");
     }
 
     private static void writeUsingOutputStream(String data, String fileName) {
