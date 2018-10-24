@@ -25,17 +25,18 @@ public class PathFinding {
         Cave[] caves;
 
         if(args.length != 1){
-            System.err.println("Use: PathFinding file.cav");
+            System.err.println("Use: PathFinding file (must be a .cav file");
             return;
         }
 
         String fileName = args[0];
-        Path path = FileSystems.getDefault().getPath("./", fileName);
+        Path path = FileSystems.getDefault().getPath("./", fileName + ".cav");
 
         try {
             file = Files.readAllLines(path);
             content = file.get(0);
         } catch (IOException e) {
+            System.err.println("Use: PathFinding file (must be a .cav file");
             e.printStackTrace();
             return;
         }
@@ -117,9 +118,9 @@ public class PathFinding {
             solution = "0";
         }
 
-        System.out.println(solution + " - Distance = " + Math.round(distance));
+        //System.out.println(solution + " - Distance = " + Math.round(distance));
 
-        writeUsingOutputStream(solution.trim(), fileName.split("\\.")[0] + ".csn");
+        writeUsingOutputStream(solution.trim(), fileName + ".csn");
     }
 
     private static void writeUsingOutputStream(String data, String fileName) {
