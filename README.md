@@ -1,4 +1,5 @@
 # PathFinding
+Read coursework.pdf for more
 
 ## Description
 A robot has to navigate through a series of small underground caverns connected by straight
